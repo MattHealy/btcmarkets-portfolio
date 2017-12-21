@@ -90,10 +90,11 @@ def get_account_balance():
             else:
                 price = get_tick_price(currency, 'AUD', False)
 
-            portfolio = portfolio + (price * balance)
+            worth = price * balance
+            portfolio = portfolio + worth
 
-            print('{} - {} ({} pending) [Trading at {}]'.format(
-                currency, balance, pending, price))
+            print('{} - {} [Trading at {}] [Value ${:,.2f} AUD]'.format(
+                currency, balance, price, worth))
 
     print("\nPortfolio balance: ${:,.2f} AUD\n".format(portfolio))
 
