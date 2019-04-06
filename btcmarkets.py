@@ -82,7 +82,7 @@ def get_account_balance():
         if coin['balance'] > 0:
 
             balance = coin['balance'] / 100000000
-            pending = coin['pendingFunds'] / 100000000
+            # pending = coin['pendingFunds'] / 100000000
             currency = coin['currency']
 
             if currency == 'AUD':
@@ -108,15 +108,19 @@ def get_tick_price(in_currency, out_currency, output=True):
     content = get(endpoint)
 
     if output:
+        if 'success' in content and not content['success']:
+            return
         print("{} current price: ".format(in_currency))
         print("{} {}\n".format(content['lastPrice'], content['currency']))
         return
     else:
+        if 'success' in content and not content['success']:
+            return 0
         return(content['lastPrice'])
 
 
 if __name__ == "__main__":
 
     get_account_balance()
-    print("\nOther coins:")
-    get_tick_price('LTC', 'BTC', True)
+    # print("\nOther coins:")
+    # get_tick_price('LTC', 'BTC', True)
